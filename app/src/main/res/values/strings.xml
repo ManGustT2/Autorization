@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Autorization</string>
+    <string name="fb_login_protocol_scheme">1863669680546393</string>
 </resources>
