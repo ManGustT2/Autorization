@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Autorization</string>
     <string name="fb_login_protocol_scheme">1863669680546393</string>
+    <string name="loading">Loading</string>
+    <string name="signed_out">Вышел</string>
+    <string name="signed_in_fmt">In</string>
 </resources>
