@@ -50,10 +50,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
         text = (TextView) findViewById(R.id.textView2);
         loginButton = (LoginButton)findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
-
         mStatusTextView = (TextView) findViewById(R.id.textView);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+
+        loginButton.setReadPermissions("email");
+
         callbackManager = CallbackManager.Factory.create();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
