@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "877716760484",
+    "project_id": "authentification-161119"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877716760484:android:d75690103dd0e7fa",
+        "android_client_info": {
+          "package_name": "com.mangust.autorization"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877716760484-12i2u257ms21qiho4gdqvm40nueu6c56.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "877716760484-bru7p6j1acamdpkido0mthid8n16hb4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mangust.autorization",
+            "certificate_hash": "618575ab3eae67dd10472f62e2c829f671f356e6"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA6hyvsPPtCxWrIqTsR-fDo2Br-682sXA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
