@@ -1,12 +1,13 @@
-package com.mangust.autorization;
+package com.mangust.autorization.view.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -15,6 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.mangust.autorization.R;
+import com.mangust.autorization.view.view.view.SignInFragment;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
@@ -23,16 +26,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static final int RC_SIGN_IN = 9001;
 
     private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
-    private ProgressDialog mProgressDialog;
+    private FragmentManager mFragmentManager;
+    private String nameString;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -48,21 +49,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         findUI();
 
-        //test
-        // do next step
-        // 1 create brack with name task what do u do
-        // 2 make google autorization
-        // 3 commit your code
-        // 4 push the code
-        // 5 create pull request to devel branch
-        // 6 told me when u done this
+        mFragmentManager = getSupportFragmentManager();
+
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
@@ -77,8 +71,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     public void findUI(){
-        mStatusTextView = (TextView) findViewById(R.id.status);
-
         findViewById(R.id.sign_in_button).setOnClickListener(this);
     }
 
@@ -101,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
-            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+            nameString = acct.getDisplayName();
+            replaceFragment(SignInFragment.newInstance(nameString), true);
             updateUI(true);
         } else {
             updateUI(false);
@@ -111,13 +104,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void updateUI(boolean signedIn) {
         if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-          //  findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
-            mStatusTextView.setText(R.string.signed_out);
-
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-           // findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     }
+
+    public void replaceFragment(Fragment fragment, boolean addBackStack) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        transaction.replace(R.id.frame, fragment, TAG);
+        if (addBackStack) transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
 
 }
