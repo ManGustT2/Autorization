@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void replaceFragment(Fragment fragment, boolean addBackStack) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.replace(R.id.frame, fragment, TAG);
+        transaction.replace(R.id.frgmCont, fragment, TAG);
         if (addBackStack) transaction.addToBackStack(null);
         transaction.commit();
     }
